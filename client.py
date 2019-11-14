@@ -8,6 +8,3 @@ scope = ['https://spreadsheets.google.com/feeds',
 credentials = ServiceAccountCredentials.from_json_keyfile_name('credentials.json', scope)
 
 gc = gspread.authorize(credentials)
-
-print(gc)
-
