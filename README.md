@@ -1,3 +1,3 @@
 # sheet
 
-Python Scipts for marking attendence in google sheet.  
+Python Scipts for marking attendence in google sheet.
