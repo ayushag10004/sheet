@@ -7,5 +7,6 @@ users = []
 def add_user(name):
 	users.append(name)
 	
-def mark_attendence(name, date):
+
 	
+def mark_attendence(name, date):
