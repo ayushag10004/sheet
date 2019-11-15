@@ -6,6 +6,21 @@ import time
 import copy
 from gspread_formatting import *
 
+def background(f):
+    '''
+    a decorator to run function in background
+    use @background above the function you want to run in the background
+    '''
+
+    def bg_f(*a, **kw):
+        # Capturing the exception whenever thread dies
+        try:
+            threading.Thread(target=f, args=a, kwargs=kw).start()
+        except:
+            pass
+
+    return bg_f
+
 app = Flask(__name__)
 
 start_date = date(2019, 11, 12).toordinal()
@@ -21,7 +36,7 @@ sheet.update_cell(1, 1, "DATE")
 
 fmt = cellFormat(
     backgroundColor=color(1, 0, 1),
-    textFormat=textFormat(bold=True, foregroundColor=color(1, 0, 1)),
+    textFormat=textFormat(bold=True, foregroundColor=color(0, 0, 0)),
     horizontalAlignment='CENTER'
     )
 
@@ -68,17 +83,20 @@ def mark_attendence(name):
 
 app.run(host="0.0.0.0", port=5555)
 
-# def run_daily_job():
-# 	while(1):
-# 		curr_date = date.today() 	
-# 		row_index = curr_date.toordinal() - start_date + 1
-# 		sheet.update_cell(row_index, 1, curr_date.__str__() )
+@background
+def run_daily_job():
+	while(1):
+		curr_date = date.today() 	
+		row_index = curr_date.toordinal() - start_date + 1
+		sheet.update_cell(row_index, 1, curr_date.__str__() )
     	
-# 		for i in range(users_count):
-# 			sheet.update_cell(row_index, i + 2, "*")
-# 			format_cell_range(sheet, rowcol_to_a1(row_index, i+2)+':' + rowcol_to_a1(row_index, i+2), fmt)
+		for i in range(users_count):
+			sheet.update_cell(row_index, i + 2, "*")
+			format_cell_range(sheet, rowcol_to_a1(row_index, i+2)+':' + rowcol_to_a1(row_index, i+2), fmt)
 
-# 		time.sleep(86400)
+		time.sleep(86400)
+
+run_daily_job()
 
 # threading.Thread(target=run_daily_job).start()
 
