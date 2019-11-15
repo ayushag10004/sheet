@@ -11,9 +11,11 @@ def add_user(name):
 	users[name] = users_count
 	sheet.update_cell(1, users_count, name)
 
-
+sheet.clear()
 add_user("Ayush")
 add_user("Sachin")
+
+
 
 # def mark_attendence(name, date):
 # 	col_index = users[name]
