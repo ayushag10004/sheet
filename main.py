@@ -2,9 +2,19 @@ from client import gc
 
 sheet = gc.open("Sheet").sheet1
 
-users = []
+users = {}
+users_count = 0
 
 def add_user(name):
-	users.append(name)
+	global users_count, users
+	users_count = users_count + 1
+	users[name] = users_count
+	sheet.update_cell(1, users_count, name)
 
-def mark_attendence(name, date):
+
+add_user("Ayush")
+add_user("Sachin")
+
+# def mark_attendence(name, date):
+# 	col_index = users[name]
+
