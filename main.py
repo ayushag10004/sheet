@@ -5,6 +5,7 @@ import threading
 import time
 import copy
 from gspread_formatting import *
+from flask import send_file
 
 def background(f):
     '''
@@ -79,7 +80,7 @@ def mark_attendence(name):
     sheet.update_cell(row_index, 1, curr_date.__str__() )
     sheet.update_cell(row_index, col_index, "Done")
 
-    return "Attendence Marked"
+    return send_file("pic.png", mimetype='image/gif')
 
 app.run(host="0.0.0.0", port=5555)
 
@@ -96,7 +97,7 @@ def run_daily_job():
 
 		time.sleep(86400)
 
-run_daily_job()
+# run_daily_job()
 
 # threading.Thread(target=run_daily_job).start()
 
