@@ -31,7 +31,6 @@ def mark_attendence(name):
 
     if name not in users:
     	return "User does not Exist"
-    	
     col_index = users[name]
     curr_date = date.today() 	
     row_index = curr_date.toordinal() - start_date + 2
