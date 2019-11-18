@@ -80,7 +80,7 @@ def mark_attendence(name):
     sheet.update_cell(row_index, 1, curr_date.__str__() )
     sheet.update_cell(row_index, col_index, "Done")
 
-    return send_file("pic.png", mimetype='image/gif')
+    return "Attendence Marked"
 
 app.run(host="0.0.0.0", port=5555)
 
